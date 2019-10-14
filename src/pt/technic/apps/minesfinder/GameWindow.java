@@ -50,6 +50,7 @@ public class GameWindow extends javax.swing.JFrame {
         JMenu Game_Menu = new JMenu("Game");
         JMenuItem newGame = new JMenuItem("New Game");
         JMenuItem Save = new JMenuItem("Save this Game");
+        JMenuItem Hint = new JMenuItem("Hint");
         JMenuItem Statistics = new JMenuItem("Statistics");
         JMenuItem Options = new JMenuItem("Options");
         JMenuItem Exit = new JMenuItem("Exit");
@@ -58,6 +59,7 @@ public class GameWindow extends javax.swing.JFrame {
         Game_Menu.add(newGame);
         Game_Menu.add(Save);
         Game_Menu.addSeparator();
+        Game_Menu.add(Hint);
         Game_Menu.add(Statistics);
         Game_Menu.add(Options);
         Game_Menu.add(Exit);
@@ -89,6 +91,23 @@ public class GameWindow extends javax.swing.JFrame {
                             Minefield.setDefeated = true;
                             MF.btnEasy_isRunning = true;
                         }
+                    }
+                }
+            }
+        });
+
+        Hint.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                command_str = e.getActionCommand();
+                if(command_str == "Hint"){
+                    if(minefield.hint>0) {
+                        (minefield.hint)--;
+                        minefield.HINTUSE=true;
+                        System.out.println("힌트 사용 "+ minefield.hint+"개 남음");//테스트용 print
+                    }
+                    else {
+                        System.out.println("힌트가 부족해");//테스트용 print
                     }
                 }
             }

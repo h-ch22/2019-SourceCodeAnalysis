@@ -7,7 +7,8 @@ import java.util.Random;
  * @author Gabriel Massadas
  */
 public class Minefield {
-
+    public static int hint=2;
+    public boolean HINTUSE = false;
     public static final int EMPTY = 0;
     // from 1 to 8 is the number of mines around
     public static final int COVERED = 9;
@@ -31,6 +32,10 @@ public class Minefield {
 
     public static boolean setDefeated;
 
+    public void HintSet() {
+        hint=2;
+    }
+
     public Minefield(int width, int height, int numMines) {
         if(numMines<=0){
             throw new IllegalArgumentException("Mines nuumber must be bigger than 0");
@@ -53,6 +58,9 @@ public class Minefield {
                 states[x][y] = COVERED;
             }
         }
+
+        HintSet(); //힌트 초기화 추가
+
     }
 
     public void revealGrid(int x, int y) {
@@ -61,6 +69,11 @@ public class Minefield {
                 firstPlay = false;
                 placeMines(x, y);
                 timeGameStarted=System.currentTimeMillis();
+            }
+
+            if(HINTUSE) {
+                isPlayerContinue();   //힌트 구현해야해
+                //	HINTUSE=false;	//jw 힌트추가
             }
 
             if (mines[x][y]) {
